@@ -1,3 +1,4 @@
+const flatten = require('lodash/flatten')
 const time = []
 
 function main(problem, file) {
@@ -12,9 +13,9 @@ function main(problem, file) {
       const library = problem.libraries[nextLibrary];
       nextSignUpDay = day + library.signupDuration; 
       if (waitingSignup !== -1) {
+        nextLibrary += 1
         libraryOpens.push(waitingSignup)
       }
-      nextLibrary += 1
       waitingSignup = nextLibrary
     }
 
@@ -30,8 +31,17 @@ function main(problem, file) {
       nextLibrary,
     })
   }
+  
+  // basic output 
+  const result = libraryOpens.map((lib) => [
+    `${lib} ${problem.libraries[lib].nbooks}`,
+    problem.libraries[lib].books.join(' ')
+  ])
 
-  return []
+  return [
+    libraryOpens.length,
+    ...flatten(result)
+  ]
 }
 
 module.exports = main
