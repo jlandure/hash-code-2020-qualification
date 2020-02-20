@@ -1,16 +1,16 @@
-const _ = require('lodash/fp')
-const fs = require('fs')
-const debug = require('debug')('write')
+const _ = require("lodash/fp");
+const fs = require("fs");
+const debug = require("debug")("write");
 
 module.exports = function write(path, solution) {
-  writeLines(path, unparse(solution))
-}
+  writeLines(path, unparse(solution));
+};
 
 function writeLines(path, lines) {
-  fs.writeFileSync(path, lines.join('\n'))
-  debug(`wrote ${lines.length} lines to ${path}`)
+  fs.writeFileSync(path, lines.join("\n"));
+  debug(`wrote ${lines.length} lines to ${path}`);
 }
 
-const unparse = lines => lines
+const unparse = lines => lines;
 
-module.exports.unparse = unparse
+module.exports.unparse = unparse;
