@@ -7,6 +7,7 @@ function main(problem, file) {
   let nextLibrary = 0
   
   let libraryOpens = [];
+
   for (let day = 0; day < problem.ndays; day++) {
     // signup process
     if (nextSignUpDay === day && nextLibrary < problem.nlibraries) {
@@ -20,8 +21,9 @@ function main(problem, file) {
     }
 
     // select book process
-
-
+    libraryOpens.forEach(lib => {
+      problem.libraries[lib].scannedBooks = [...new Set([].concat(problem.libraries[lib].scannedBooks || []).concat(problem.libraries[lib].books))]
+    })
 
     console.log({
       day, 
@@ -29,13 +31,14 @@ function main(problem, file) {
       waitingSignup,
       libraryOpens,
       nextLibrary,
+      scanned: libraryOpens.map(lib => problem.libraries[lib].scannedBooks),
     })
   }
   
   // basic output 
   const result = libraryOpens.map((lib) => [
-    `${lib} ${problem.libraries[lib].nbooks}`,
-    problem.libraries[lib].books.join(' ')
+    `${lib} ${problem.libraries[lib].scannedBooks.length}`,
+    problem.libraries[lib].scannedBooks.join(' ')
   ])
 
   return [
