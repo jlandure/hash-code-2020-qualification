@@ -2,9 +2,10 @@ const debug = require("debug")("solve");
 const _ = require("lodash");
 const gridUtils = require("./grid-utils");
 
-function solve(problem, file) {
+const algo = require('./src/algo1');
 
-  return []
+function solve(problem, file) {
+  return algo(problem, file);
 }
 
 module.exports = solve;
