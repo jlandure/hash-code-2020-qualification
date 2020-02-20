@@ -28,7 +28,20 @@ module.exports = function read(filePath) {
 };
 
 const parse = inputText => {
-  const value = jolicitron([], inputText);
+  const value = jolicitron(
+    [
+      "nbooks",
+      "nlibraries",
+      "ndays",
+      ["scores", "nbooks"],
+      [
+        "libraries",
+        "nlibraries",
+        ["nbooks", "signupDuration", "shipCapacity", ["books", "nbooks"]]
+      ]
+    ],
+    inputText
+  );
   debug("end");
   return value;
 };
